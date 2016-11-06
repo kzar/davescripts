@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while [ TRUE ];do
+    if [ `nmcli networking connectivity` = 'full' ]
+    then
+        $@
+        break;
+    fi
+    echo "`date` Offline, retrying..."
+    sleep 5
+done
