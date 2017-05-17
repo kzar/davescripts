@@ -1,0 +1,21 @@
+#!/bin/bash
+# https://borgbackup.readthedocs.io/en/stable/quickstart.html#automating-backups
+
+if [ -z "$1" ]; then
+    echo "Please specify the Borg repository!"
+    exit 1
+fi
+
+# Backup all of /home and /var/www except a few
+# excluded directories
+borg create -v --list                           \
+    $1::'{hostname}-{now:%Y-%m-%d}'             \
+    ~/Davebox                                   \
+    --exclude '/home/kzar/Davebox/home/Maildir/.notmuch'
+
+# Use the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
+# archives of THIS machine. The '{hostname}-' prefix is very important to
+# limit prune's operation to this machine's archives and not apply to
+# other machine's archives also.
+borg prune -v --list $1 --prefix '{hostname}-' \
+    --keep-daily=7 --keep-weekly=4 --keep-monthly=6
