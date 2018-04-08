@@ -1,0 +1,10 @@
+#!/bin/bash
+if [ ! -f $2 ]; then
+  wget -q $1 -O $2
+else
+  NEW=$(wget -q $1 -O -)
+  DIFF=$(echo "$NEW" | diff -U1 $2 - | grepdiff 'DESCRIPTION' --output-matching=hunk)
+  if [[ "$NEW" != "" && "$DIFF" != "" ]]; then
+    echo "$DIFF" | patch -s $2 -
+  fi
+fi
