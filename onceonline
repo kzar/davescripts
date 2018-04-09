@@ -1,11 +1,12 @@
 #!/bin/bash
+set -ueo pipefail
 
-while [ TRUE ];do
-    if [ `nmcli networking connectivity` = 'full' ]
+while [[ TRUE ]];do
+    if [[ $(nmcli networking connectivity) = 'full' ]]
     then
         $@
         break;
     fi
-    echo "`date` Offline, retrying..."
+    echo "$(date) Offline, retrying..."
     sleep 5
 done

@@ -1,7 +1,8 @@
 #!/bin/bash
+set -ueo pipefail
 # https://borgbackup.readthedocs.io/en/stable/quickstart.html#automating-backups
 
-if [ -z "$1" ]; then
+if [[ -z "$1" ]]; then
     echo "Please specify the Borg repository!"
     exit 1
 fi
