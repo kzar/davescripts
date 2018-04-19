@@ -7,6 +7,10 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
+# Prompt for the password separately, so that it doesn't need to be entered
+# manually for both `borg create` and `borg prune`.
+export BORG_PASSPHRASE=$(systemd-ask-password)
+
 # Backup all of /home and /var/www except a few
 # excluded directories
 borg create -v --list                           \
