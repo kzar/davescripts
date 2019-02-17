@@ -16,7 +16,8 @@ export BORG_PASSPHRASE=$(systemd-ask-password)
 borg create -v --list                           \
     $1::'{hostname}-{now:%Y-%m-%d}'             \
     ~/Davebox                                   \
-    --exclude '/home/kzar/Davebox/home/Maildir/.notmuch'
+    --exclude '/home/kzar/Davebox/home/Maildir/.notmuch' \
+    --exclude '/home/kzar/Davebox/work/personal/chromium'
 
 # Use the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
 # archives of THIS machine. The '{hostname}-' prefix is very important to
