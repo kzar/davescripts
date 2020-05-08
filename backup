@@ -16,7 +16,7 @@ export BORG_PASSPHRASE=$(systemd-ask-password)
 borg create -v --list                           \
     $1::'{hostname}-{now:%Y-%m-%d}'             \
     ~/Davebox                                   \
-    --exclude '/home/kzar/Davebox/home/Maildir/.notmuch' \
+    --exclude '/home/kzar/Davebox/Maildir/.notmuch' \
     --exclude '/home/kzar/Davebox/work/personal/chromium' \
     --exclude '/home/kzar/Davebox/work/personal/mozilla-unified'
 # Use the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
