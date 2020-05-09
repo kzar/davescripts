@@ -11,6 +11,9 @@ fi
 # manually for both `borg create` and `borg prune`.
 export BORG_PASSPHRASE=$(systemd-ask-password)
 
+# We export our notmuch mail tags, so we can skip backing up the whole database.
+notmuch dump --output ~/Davebox/archives/backups/notmuch-tags.txt
+
 # Backup all of /home and /var/www except a few
 # excluded directories
 borg create -v --list                           \
