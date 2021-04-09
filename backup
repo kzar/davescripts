@@ -16,15 +16,17 @@ notmuch dump --output ~/Davebox/archives/backups/notmuch-tags.txt
 
 # Backup all of /home and /var/www except a few
 # excluded directories
-borg create -v --list                           \
-    $1::'{hostname}-{now:%Y-%m-%d}'             \
-    ~/Davebox                                   \
-    --exclude '/home/kzar/Davebox/Maildir/.notmuch' \
-    --exclude '/home/kzar/Davebox/work/personal/chromium' \
+borg create --remote-path /usr/local/bin/borg                    \
+            -v --list                                            \
+    $1::'{hostname}-{now:%Y-%m-%d}'                              \
+    ~/Davebox                                                    \
+    --exclude '/home/kzar/Davebox/Maildir/.notmuch'              \
+    --exclude '/home/kzar/Davebox/work/personal/chromium'        \
     --exclude '/home/kzar/Davebox/work/personal/mozilla-unified'
 # Use the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
 # archives of THIS machine. The '{hostname}-' prefix is very important to
 # limit prune's operation to this machine's archives and not apply to
 # other machine's archives also.
-borg prune -v --list $1 --prefix '{hostname}-' \
-    --keep-daily=7 --keep-weekly=4 --keep-monthly=6
+borg prune --remote-path /usr/local/bin/borg -v --list $1        \
+     --prefix '{hostname}-' --keep-daily=7 --keep-weekly=4       \
+     --keep-monthly=6
