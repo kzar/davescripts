@@ -22,7 +22,8 @@ borg create --remote-path /usr/local/bin/borg                    \
     ~/Davebox                                                    \
     --exclude '/home/kzar/Davebox/Maildir/.notmuch'              \
     --exclude '/home/kzar/Davebox/work/personal/chromium'        \
-    --exclude '/home/kzar/Davebox/work/personal/mozilla-unified'
+    --exclude '/home/kzar/Davebox/work/personal/mozilla-unified' \
+    --exclude '/home/kzar/Davebox/Music/Audiobooks/aax'
 # Use the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
 # archives of THIS machine. The '{hostname}-' prefix is very important to
 # limit prune's operation to this machine's archives and not apply to
